@@ -1,0 +1,33 @@
+# depslib dependency file v1.0
+1764126845 source:c:\users\mells\onedrive\documentos\batalha_naval\batalha_naval\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	"menu.h"
+	"tabuleiro.h"
+	"navios.h"
+
+1764126854 c:\users\mells\onedrive\documentos\batalha_naval\batalha_naval\menu.h
+
+1764126849 c:\users\mells\onedrive\documentos\batalha_naval\batalha_naval\tabuleiro.h
+
+1764126881 c:\users\mells\onedrive\documentos\batalha_naval\batalha_naval\navios.h
+
+1764116189 source:c:\users\mells\onedrive\documentos\batalha_naval\batalha_naval\menu.h
+
+1764126847 source:c:\users\mells\onedrive\documentos\batalha_naval\batalha_naval\navios.c
+	<stdio.h>
+	"navios.h"
+
+1764116135 source:c:\users\mells\onedrive\documentos\batalha_naval\batalha_naval\navios.h
+
+1764126996 source:c:\users\mells\onedrive\documentos\batalha_naval\batalha_naval\tabuleiro.c
+	<stdio.h>
+	"tabuleiro.h"
+
+1764116049 source:c:\users\mells\onedrive\documentos\batalha_naval\batalha_naval\tabuleiro.h
+
+1764126858 source:c:\users\mells\onedrive\documentos\batalha_naval\batalha_naval\menu.c
+	<stdio.h>
+	"menu.h"
+
