@@ -54,7 +54,7 @@ void posicaonavio (char tab[8][8], ponto posicoes[], int tamanho) {
 
         int pode = 1; // assume que pode colocar
 
-        // verifica cada parte do navio
+        // verifica cada parte do navio (sem gravar)
         for (int i = 0; i < tamanho; i++) {
             int x = linha;
             int y = coluna;
@@ -82,13 +82,24 @@ void posicaonavio (char tab[8][8], ponto posicoes[], int tamanho) {
             continue; // repete desde o início
         }
 
-            posicoes[i].x = x;   // salva linha
-            posicoes[i].y = y;   // salva coluna
+
+          // se chegou aqui,pode==1 e agora grava posições
+        for (int i = 0; i < tamanho; i++) {
+            int x = linha;
+            int y = coluna;
+
+            if (direcao == 1) x -= i;
+            if (direcao == 2) x += i;
+            if (direcao == 3) y += i;
+            if (direcao == 4) y -= i;
+
+            posicoes[i].x = x;
+            posicoes[i].y = y;
 
             tab[x][y] = 'N'; // marca o navio no tabuleiro
         }
 
-        printf("\nNavios colocados com sucesso!\n\n");
+        printf("\nNavio colocado com sucesso!\n\n");
         break; // sai do while, navio posicionado
     }
 }
@@ -104,7 +115,9 @@ void posicionarNavio(char tab[8][8]){
     submarino sub1;
     bote bote1, bote2;
 
+    printf("\n");
     printf("Vamos posicionar os navios! \n");
+    printf("Vamos começar pelo Porta-Avião.\n");
 
     printf("\n=== Porta-Aviões (5 espaços) ===\n");
     posicaonavio(tab, pA1.posicao, 5);
