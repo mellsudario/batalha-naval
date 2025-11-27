@@ -9,41 +9,41 @@ typedef struct {
     int y;
 } ponto;
 
-// porta-aviõe que ocupa 5 espaços
+// porta-aviÃµe que ocupa 5 espaÃ§os
 typedef struct {
     ponto posicao[5];
 } portaAvioes;
 
-// navio-tanque ocupa 4 espaços
+// navio-tanque ocupa 4 espaÃ§os
 typedef struct {
     ponto posicao[4];
 } navioTanque;
 
-// submarino ocupa 3 espaços
+// submarino ocupa 3 espaÃ§os
 typedef struct {
     ponto posicao[3];
 } submarino;
 
-// bote ocupa 2 espaços
+// bote ocupa 2 espaÃ§os
 typedef struct {
     ponto posicao[2];
 } bote;
 
 
-void posicaonavio(ponto inicial){ // lê uma coordenada válida
+void pontoinicial (ponto inicial){ // lÃª uma coordenada vÃ¡lida
     do {
-        printf("Linha (1–8): \n");
-        scanf("%d", &inicial.x); // lê linha escolhida
+        printf("Linha (1â€“8): \n");
+        scanf("%d", &inicial.x); // lÃª linha escolhida
          if(inicial.x >8 || inicial.x <1)
-            printf("Coordenada inválida!\n");
-    } while (inicial.x >8 || inicial.x <1); // repete até estar correto
+            printf("Coordenada invÃ¡lida!\n");
+    } while (inicial.x >8 || inicial.x <1); // repete atÃ© estar correto
 
     do {
-        printf("Coluna (1–8): \n ");
-        scanf("%d", &inicial.y); // lê coluna escolhida
-        if (inicial.x >8 || inicial.x <1)
-            printf("Coordenada inválida!\n");
-    } while (inicial.x >8 || inicial.x <1); // repete até estar correto
+        printf("Coluna (1â€“8): \n ");
+        scanf("%d", &inicial.y); // lÃª coluna escolhida
+        if (inicial.y >8 || inicial.y <1)
+            printf("Coordenada invÃ¡lida!\n");
+    } while (inicial.y >8 || inicial.y <1); // repete atÃ© estar correto
 }
 
 void posicionarNavio(char tab[8][8]){ // inicia posicionamento dos navios
@@ -51,12 +51,13 @@ void posicionarNavio(char tab[8][8]){ // inicia posicionamento dos navios
     navioTanque nT1;
     submarino sub1;
     bote bote1, bote2;
-
+    ponto casa_ocupada [16]; 
+    
     printf("\n");
     printf("Vamos posicionar os navios! \n");
-    printf("Vamos começar pelo Porta-Avião.\n");
+    printf("Vamos comeÃ§ar pelo Porta-AviÃ£o.\n");
     printf("Lembrando que ele ocupa 5 casas. \n");
-    printf("Escolha a primeira posição: \n");
+    printf("Escolha a primeira posiÃ§Ã£o: \n");
     posicaonavio(pA1.posicao[0]);
 
 
