@@ -31,3 +31,26 @@
 	<stdio.h>
 	"menu.h"
 
+1764203848 source:c:\users\mells\onedrive\documentos\batalha_naval\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+
+1764126854 c:\users\mells\onedrive\documentos\batalha_naval\menu.h
+
+1764126849 c:\users\mells\onedrive\documentos\batalha_naval\tabuleiro.h
+
+1764126881 c:\users\mells\onedrive\documentos\batalha_naval\navios.h
+
+1764204293 source:c:\users\mells\onedrive\documentos\batalha_naval\menu.c
+	<stdio.h>
+	<stdlib.h>
+
+1764204283 source:c:\users\mells\onedrive\documentos\batalha_naval\navios.c
+	<stdio.h>
+	<stdlib.h>
+
+1764204288 source:c:\users\mells\onedrive\documentos\batalha_naval\tabuleiro.c
+	<stdio.h>
+	<stdlib.h>
+

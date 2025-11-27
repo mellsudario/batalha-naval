@@ -1,7 +1,34 @@
 #include <stdio.h>
-#include "navios.h" // inclui structs e funções relacionadas a navios
+#include <stdlib.h>
 
-void posicaonavio(ponto inicial){
+// guarda as coordenadas de um navio
+typedef struct {
+    int x;
+    int y;
+} ponto;
+
+// porta-aviõe que ocupa 5 espaços
+typedef struct {
+    ponto posicao[5];
+} portaAvioes;
+
+// navio-tanque ocupa 4 espaços
+typedef struct {
+    ponto posicao[4];
+} navioTanque;
+
+// submarino ocupa 3 espaços
+typedef struct {
+    ponto posicao[3];
+} submarino;
+
+// bote ocupa 2 espaços
+typedef struct {
+    ponto posicao[2];
+} bote;
+
+
+void posicaonavio(ponto inicial){ // lê uma coordenada válida
     do {
         printf("Linha (1–8): \n");
         scanf("%d", &inicial.x); // lê linha escolhida
@@ -17,7 +44,7 @@ void posicaonavio(ponto inicial){
     } while (inicial.x >8 || inicial.x <1); // repete até estar correto
 }
 
-void posicionarNavio(char tab[8][8]){
+void posicionarNavio(char tab[8][8]){ // inicia posicionamento dos navios
     portaAvioes pA1;
     navioTanque nT1;
     submarino sub1;

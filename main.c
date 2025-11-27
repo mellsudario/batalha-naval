@@ -2,9 +2,6 @@
 #include <stdlib.h>
 #include <locale.h> // permite usar acentuação
 
-#include "menu.h" // funções do menu
-#include "tabuleiro.h" // funções do tabuleiro
-#include "navios.h" // funções e structs dos navios
 
 int main() {
     setlocale(LC_ALL, "Portuguese");

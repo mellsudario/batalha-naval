@@ -38,29 +38,11 @@
 		<Unit filename="menu.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="menu.h">
-			<Option compilerVar="CC" />
-			<Option compile="1" />
-			<Option link="1" />
-			<Option target="Release" />
-		</Unit>
 		<Unit filename="navios.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="navios.h">
-			<Option compilerVar="CC" />
-			<Option compile="1" />
-			<Option link="1" />
-			<Option target="Release" />
-		</Unit>
 		<Unit filename="tabuleiro.c">
 			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="tabuleiro.h">
-			<Option compilerVar="CC" />
-			<Option compile="1" />
-			<Option link="1" />
-			<Option target="Release" />
 		</Unit>
 		<Extensions />
 	</Project>

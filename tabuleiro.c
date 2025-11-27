@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "tabuleiro.h" // inclui funções do tabuleiro
+#include <stdlib.h>
 
-void mostrartabuleiro(char tab[8][8]) {
+void mostrartabuleiro(char tab[8][8]) { // exibe o tabuleiro
     printf("  "); // recurso estético
     for(int p=1; p<9; p++) //numeração das colunas
         printf("%d ", p);
@@ -16,7 +16,7 @@ void mostrartabuleiro(char tab[8][8]) {
     }
 }
 
-void inicializartab(char tab[8][8]) {
+void inicializartab(char tab[8][8]) { // preenche com '~'
     for(int i=0; i<8; i++) {
         for(int k=0; k<8; k++) {
             tab[i][k] = '~'; // '~' representa água
