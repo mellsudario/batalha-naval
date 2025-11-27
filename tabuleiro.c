@@ -4,8 +4,8 @@
 
 void mostrartabuleiro(char tab[8][8]) { // exibe o tabuleiro
     printf("  "); // recurso estético
-    for(int p=1; p<9; p++) //numeração das colunas
-        printf("%d ", p);
+    for(int p=0; p<8; p++) //numeração das colunas
+        printf("%d ", p + 1);
     printf("\n");
 
     for(int i=0; i<8; i++) {

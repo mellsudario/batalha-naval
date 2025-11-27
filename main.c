@@ -37,6 +37,7 @@ int main() {
 
                 mostrartabuleiro(tab1); // exibe o tabuleiro
                 posicionarNavio(tab1); // começa posicionamento dos navios
+                mostrartabuleiro(tab1); // exibe o tabuleiro com o local dos navios
                 break;
 
             case 2:

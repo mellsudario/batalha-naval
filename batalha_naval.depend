@@ -31,10 +31,11 @@
 	<stdio.h>
 	"menu.h"
 
-1764203848 source:c:\users\mells\onedrive\documentos\batalha_naval\main.c
+1764271429 source:c:\users\mells\onedrive\documentos\batalha_naval\main.c
 	<stdio.h>
 	<stdlib.h>
 	<locale.h>
+	<string.h>
 
 1764126854 c:\users\mells\onedrive\documentos\batalha_naval\menu.h
 
@@ -42,16 +43,16 @@
 
 1764126881 c:\users\mells\onedrive\documentos\batalha_naval\navios.h
 
-1764204293 source:c:\users\mells\onedrive\documentos\batalha_naval\menu.c
+1764205438 source:c:\users\mells\onedrive\documentos\batalha_naval\menu.c
 	<stdio.h>
 	<stdlib.h>
 
-1764205106 source:c:\users\mells\onedrive\documentos\batalha_naval\navios.c
+1764270899 source:c:\users\mells\onedrive\documentos\batalha_naval\navios.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1764205089 source:c:\users\mells\onedrive\documentos\batalha_naval\tabuleiro.c
+1764267777 source:c:\users\mells\onedrive\documentos\batalha_naval\tabuleiro.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
