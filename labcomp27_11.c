@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <locale.h> // permite usar acentuação
+#include <locale.h> 
 #include <string.h>
 
 typedef struct{
