@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void mostrartabuleiro(char tab[8][8]) { // exibe o tabuleiro
     printf("  "); // recurso estético

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 
-// aqui está a implementação da função declarada no menu.h
+
 void instrucoes() { // exibe explicação das regras
     printf("\n===== INSTRUÇÕES =====\n");
     printf("1. O jogo segue o modelo tradicional de Batalha Naval.\n");

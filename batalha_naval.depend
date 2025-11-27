@@ -46,11 +46,13 @@
 	<stdio.h>
 	<stdlib.h>
 
-1764204283 source:c:\users\mells\onedrive\documentos\batalha_naval\navios.c
+1764205106 source:c:\users\mells\onedrive\documentos\batalha_naval\navios.c
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
 
-1764204288 source:c:\users\mells\onedrive\documentos\batalha_naval\tabuleiro.c
+1764205089 source:c:\users\mells\onedrive\documentos\batalha_naval\tabuleiro.c
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
 
