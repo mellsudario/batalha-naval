@@ -31,11 +31,11 @@
 	<stdio.h>
 	"menu.h"
 
-1764271429 source:c:\users\mells\onedrive\documentos\batalha_naval\main.c
+1764965083 source:c:\users\mells\onedrive\documentos\batalha_naval\main.c
 	<stdio.h>
 	<stdlib.h>
-	<locale.h>
 	<string.h>
+	<locale.h>
 
 1764126854 c:\users\mells\onedrive\documentos\batalha_naval\menu.h
 
