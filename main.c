@@ -3,11 +3,11 @@
 #include <string.h>
 #include <locale.h>
 
-void instrucoes() { // exibe explicação das regras
-    printf("\n===== INSTRUÇÕES =====\n");
+void instrucoes() { // exibe explicaÃ§Ã£o das regras
+    printf("\n===== INSTRUÃ‡Ã•ES =====\n");
     printf("1. O jogo segue o modelo tradicional de Batalha Naval.\n");
     printf("2. Dois jogadores posicionam seus navios no tabuleiro.\n");
-    printf("3. Os jogadores alternam turnos tentando acertar os navios adversários.\n");
+    printf("3. Os jogadores alternam turnos tentando acertar os navios adversÃ¡rios.\n");
     printf("4. Vence quem destruir todos os navios inimigos.\n\n");
 }
 typedef struct{
@@ -36,13 +36,13 @@ int contador_rodadas = 0;
 
 
 
-void mostrartabuleiro(char tab1[8][8]){ // funçao para mostrar tabuleiro de posiçao dos navios do jogador 1
-    printf("  "); // recurso estético
-    for(int p=1;p<9;p++)//numeração das colunas
+void mostrartabuleiro(char tab1[8][8]){ // funÃ§ao para mostrar tabuleiro de posiÃ§ao dos navios do jogador 1
+    printf("  "); // recurso estÃ©tico
+    for(int p=1;p<9;p++)//numeraÃ§Ã£o das colunas
         printf("%d ",p);
     printf("\n");
     for(int i=0; i<8;i++){
-        printf("%d ",i+1); // numeração das linhas
+        printf("%d ",i+1); // numeraÃ§Ã£o das linhas
         for(int k=0;k<8;k++){
         printf("%c ",tab1[i][k]); // composicao da matriz
         }
@@ -51,7 +51,7 @@ void mostrartabuleiro(char tab1[8][8]){ // funçao para mostrar tabuleiro de posi
     }
 
 
-void inicializartabuleiro(char tab1[8][8]){  // funçao para inicializar o tabuleiro
+void inicializartabuleiro(char tab1[8][8]){  // funÃ§ao para inicializar o tabuleiro
     for(int i=0; i<8;i++){
         for(int k=0;k<8;k++){
             tab1[i][k] = '~';
@@ -62,28 +62,28 @@ void inicializartabuleiro(char tab1[8][8]){  // funçao para inicializar o tabule
 void posicaonavio (char tab[8][8], ponto posicoes[], int tamanho) {
     int linha, coluna, direcao;
 
-    while (1) { // repete até colocar o navio corretamente
+    while (1) { // repete atÃ© colocar o navio corretamente
 
         printf("Escolha a linha (1-8): ");
         scanf("%d", &linha);
         printf("Escolha a coluna (1-8): ");
         scanf("%d", &coluna);
 
-        // converte para índice começando em 0
+        // converte para Ã­ndice comeÃ§ando em 0
         linha--;
         coluna--;
 
-        // escolhe direção
-        printf("Escolha a direção:\n");
+        // escolhe direÃ§Ã£o
+        printf("Escolha a direÃ§Ã£o:\n");
         do {
           printf("1 - Norte\n");
           printf("2 - Sul\n");
           printf("3 - Leste\n");
           printf("4 - Oeste\n");
-          printf("Digite a direção (1-4): ");
+          printf("Digite a direÃ§Ã£o (1-4): ");
           scanf("%d", &direcao);
        if (direcao < 1 || direcao > 4) {
-        printf("\nDireção inválida! Escolha um valor entre 1 e 4.\n\n");
+        printf("\nDireÃ§Ã£o invÃ¡lida! Escolha um valor entre 1 e 4.\n\n");
     }
 } while (direcao < 1 || direcao > 4);
 
@@ -105,7 +105,7 @@ void posicaonavio (char tab[8][8], ponto posicoes[], int tamanho) {
                 break;
             }
 
-            // verifica colisão com outro navio
+            // verifica colisÃ£o com outro navio
             if (tab[x][y] != '~') {
                 pode = 0;
                 break;
@@ -113,12 +113,12 @@ void posicaonavio (char tab[8][8], ponto posicoes[], int tamanho) {
         }
 
         if (pode == 0) {
-            printf("\n Posição inválida! O navio não cabe ou colide com outro.\n\n");
-            continue; // repete desde o início
+            printf("\n PosiÃ§Ã£o invÃ¡lida! O navio nÃ£o cabe ou colide com outro.\n\n");
+            continue; // repete desde o inÃ­cio
         }
 
 
-          // se chegou aqui,pode==1 e agora grava posições
+          // se chegou aqui,pode==1 e agora grava posiÃ§Ãµes
         for (int i = 0; i < tamanho; i++) {
             int x = linha;
             int y = coluna;
@@ -149,21 +149,21 @@ void posicionarNavio(char tab1[8][8]){
 
     printf("\n");
     printf("Vamos posicionar os navios! \n");
-    printf("Vamos começar pelo Porta-Avião.\n");
+    printf("Vamos comeÃ§ar pelo Porta-AviÃ£o.\n");
 
-    printf("\n=== Porta-Aviões (5 espaços) ===\n");
+    printf("\n=== Porta-AviÃµes (5 espaÃ§os) ===\n");
     posicaonavio(tab1, pA1.posicao, 5);
 
-    printf("\n=== Navio-Tanque (4 espaços) ===\n");
+    printf("\n=== Navio-Tanque (4 espaÃ§os) ===\n");
     posicaonavio(tab1, nT1.posicao, 4);
 
-    printf("\n=== Submarino (3 espaços) ===\n");
+    printf("\n=== Submarino (3 espaÃ§os) ===\n");
     posicaonavio(tab1, sub1.posicao, 3);
 
-    printf("\n=== Bote 1 (2 espaços) ===\n");
+    printf("\n=== Bote 1 (2 espaÃ§os) ===\n");
     posicaonavio(tab1, bote1.posicao, 2);
 
-    printf("\n=== Bote 2 (2 espaços) ===\n");
+    printf("\n=== Bote 2 (2 espaÃ§os) ===\n");
     posicaonavio(tab1, bote2.posicao, 2);
 }
 
@@ -179,7 +179,7 @@ void rodadas(char tabDefesa[8][8], char tabAtaque[8][8]) {
     printf("Escolha a coluna (1-8): ");
     scanf("%d", &coluna);
 
-    // converter para índice da matriz
+    // converter para Ã­ndice da matriz
     x = linha - 1;
     y = coluna - 1;
 
@@ -188,9 +188,9 @@ void rodadas(char tabDefesa[8][8], char tabAtaque[8][8]) {
         return;
     }
 
-    //posição repetida
+    //posiÃ§Ã£o repetida
     if (tabAtaque[x][y] == 'X' || tabAtaque[x][y] == 'O') {
-    printf("\nVocê já jogou nessa posição! Rodada perdida.\n");
+    printf("\nVocÃª jÃ¡ jogou nessa posiÃ§Ã£o! Rodada perdida.\n");
     contador_rodadas++;
     return;
 }
@@ -205,7 +205,7 @@ void rodadas(char tabDefesa[8][8], char tabAtaque[8][8]) {
         printf("\n ERROU! \n");
         tabAtaque[x][y] = 'O';       // marca erro no tabuleiro de ataque
         if (tabDefesa[x][y] == '~')
-            tabDefesa[x][y] = 'O';   // marca erro também no tabuleiro de defesa
+            tabDefesa[x][y] = 'O';   // marca erro tambÃ©m no tabuleiro de defesa
     }
 
     // imprimir tabuleiro ataque FEITO
@@ -217,19 +217,19 @@ void rodadas(char tabDefesa[8][8], char tabAtaque[8][8]) {
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
             if (tabDefesa[i][j] == 'N') {
-                acabou = 0; // ainda há navio vivo
+                acabou = 0; // ainda hÃ¡ navio vivo
             }
         }
     }
 
     if (acabou) {
-        printf("\n TODOS OS NAVIOS DO INIMIGO FORAM DESTRUÍDOS! \n");
+        printf("\n TODOS OS NAVIOS DO INIMIGO FORAM DESTRUÃDOS! \n");
         printf("\n FIM DE JOGO! \n");
     }
 
     contador_rodadas++;
 
-     // todo fim de rodada: guardar informações no arquivo FAZER
+     // todo fim de rodada: guardar informaÃ§Ãµes no arquivo FAZER
 }
 
 int aindaTemNavio(char tab[8][8]) {
@@ -256,7 +256,7 @@ int main() {
     inicializartabuleiro(ataque1); //tabuleiro de ataque do jogador 1
     inicializartabuleiro(ataque2); //tabuleiro de ataque do jogador 2
 
-    int opcao; // variável usada para guardar a opção escolhida pelo usuário no menu
+    int opcao; // variÃ¡vel usada para guardar a opÃ§Ã£o escolhida pelo usuÃ¡rio no menu
 
     do {
         printf("\n==============================\n");
@@ -264,33 +264,33 @@ int main() {
         printf("==============================\n");
         printf("1 - Novo Jogo\n");
         printf("2 - Continuar Jogo\n");
-        printf("3 - Instruções\n");
+        printf("3 - InstruÃ§Ãµes\n");
         printf("4 - Sair do Jogo\n");
-        printf("Escolha uma opção (1–4): ");
+        printf("Escolha uma opÃ§Ã£o (1â€“4): ");
 
-        scanf("%d", &opcao); // lê opção do jogador
+        scanf("%d", &opcao); // lÃª opÃ§Ã£o do jogador
 
-        switch(opcao) { // estrutura switch para tratar cada opção do menu
+        switch(opcao) { // estrutura switch para tratar cada opÃ§Ã£o do menu
             case 1:
             printf("\n Novo jogo \n\n");
 
             // Jogador 1
             mostrartabuleiro(tab1); // exibe o tabuleiro do jogador 1
-            posicionarNavio(tab1); // começa o posicionamento dos navios do jogador 1
+            posicionarNavio(tab1); // comeÃ§a o posicionamento dos navios do jogador 1
 
 
-            system("cls"); // limpa a tela
-            printf("\nTabuleiro do Jogador 1 salvo!\nAgora o Jogador 2 irá posicionar os navios.\n");
+            system("cls"); // limpa a tela - se for abrir no linux tem que colocar system("clear")
+            printf("\nTabuleiro do Jogador 1 salvo!\nAgora o Jogador 2 irÃ¡ posicionar os navios.\n");
 
             // Jogador 2
             mostrartabuleiro(tab2); // exibe o tabuleiro do jogador 2
-            posicionarNavio(tab2); // começa o posicionamento dos navios do jogador 2
+            posicionarNavio(tab2); // comeÃ§a o posicionamento dos navios do jogador 2
 
-            system("cls"); // limpa novamente
+            system("cls"); // limpa a tela - se for abrir no linux tem que colocar system("clear")
 
                  printf("\n===== INICIANDO AS RODADAS =====\n");
 
-                // loop até alguém vencer
+                // loop atÃ© alguÃ©m vencer
                 while (1) {
 
                 printf("\n VEZ DO JOGADOR 1 \n");
@@ -320,7 +320,7 @@ int main() {
                 break;
 
             case 3:
-                instrucoes(); // mostra instruções
+                instrucoes(); // mostra instruÃ§Ãµes
                 break;
 
             case 4:
@@ -328,11 +328,11 @@ int main() {
                 return 0;
                 break;
 
-            default: // se o usuário digitar algo diferente de 1 a 4
-                printf("\nOpção inválida! Tente novamente.\n");
+            default: // se o usuÃ¡rio digitar algo diferente de 1 a 4
+                printf("\nOpÃ§Ã£o invÃ¡lida! Tente novamente.\n");
         }
 
-    } while (opcao != 4); // o menu continua repetindo até que a opção 4 seja escolhida
+    } while (opcao != 4); // o menu continua repetindo atÃ© que a opÃ§Ã£o 4 seja escolhida
 
     return 0;
 }
