@@ -10,7 +10,6 @@ void instrucoes() { // exibe explicação das regras
     printf("3. Os jogadores alternam turnos tentando acertar os navios adversários.\n");
     printf("4. Vence quem destruir todos os navios inimigos.\n\n");
 }
-
 typedef struct{
     int x;
     int y;
@@ -33,7 +32,14 @@ typedef struct{
 }bote;
 
 
-void mostrartabuleiro(char tab1[8][8]){ // funçao para a posiçao dos navios do jogador
+    // cria as estruturas
+    portaAvioes pA1;
+    navioTanque nT1;
+    submarino sub1;
+    bote bote1, bote2;
+
+
+void mostrartabuleiro(char tab1[8][8]){ // funçao para mostrar tabuleiro de posiçao dos navios do jogador 1
     printf("  "); // recurso estético
     for(int p=1;p<9;p++)//numeração das colunas
         printf("%d ",p);
@@ -138,12 +144,6 @@ void posicaonavio (char tab[8][8], ponto posicoes[], int tamanho) {
 
 void posicionarNavio(char tab1[8][8]){
 
-    // cria as estruturas
-    bote bote1, bote2;
-    portaAvioes pA1;
-    navioTanque nT1;
-    submarino sub1;
-
     printf("\n");
     printf("Vamos posicionar os navios! \n");
     printf("Vamos começar pelo Porta-Avião.\n");
@@ -164,6 +164,16 @@ void posicionarNavio(char tab1[8][8]){
     posicaonavio(tab1, bote2.posicao, 2);
 }
 
+// função para checar se um navio foi afundado
+int navioAfundado(ponto posicoes[], int tamanho, char tab[8][8]) {
+for (int i = 0; i < tamanho; i++) {
+if (tab[posicoes[i].x][posicoes[i].y] != 'X') {
+return 0; // ainda tem parte viva
+}
+}
+return 1; // navio afundado
+}
+
 
 int acertosJog1 = 0;
 int errosJog1 = 0;
@@ -179,7 +189,7 @@ void rodadas(char tabDefesa[8][8], char tabAtaque[8][8], int jogador) {
 
 
     printf("\nPosiscione seu ataque: \n");
-    printf("Escolha a linha (1-8): ");
+    printf("Escolha a linha (1-8): "); // receber as coordenadas
     scanf("%d", &linha);
     printf("Escolha a coluna (1-8): ");
     scanf("%d", &coluna);
@@ -193,7 +203,7 @@ void rodadas(char tabDefesa[8][8], char tabAtaque[8][8], int jogador) {
         return;
     }
 
-
+    //posição repetida
     if (tabAtaque[x][y] == 'X' || tabAtaque[x][y] == 'O') {
     printf("\nVocê já jogou nessa posição! Rodada perdida.\n");
     return;
@@ -207,9 +217,26 @@ void rodadas(char tabDefesa[8][8], char tabAtaque[8][8], int jogador) {
 
          if (jogador == 1) acertosJog1++;
          else acertosJog2++;
+
+        // avisa se o navio afundou
+if (navioAfundado(pA1.posicao, 5, tabDefesa))
+    printf("O Porta-Aviões foi AFUNDADO!\n");
+
+if (navioAfundado(nT1.posicao, 4, tabDefesa))
+    printf("O Navio-Tanque foi AFUNDADO!\n");
+
+if (navioAfundado(sub1.posicao, 3, tabDefesa))
+    printf("O Submarino foi AFUNDADO!\n");
+
+if (navioAfundado(bote1.posicao, 2, tabDefesa))
+    printf("O Bote 1 foi AFUNDADO!\n");
+
+if (navioAfundado(bote2.posicao, 2, tabDefesa))
+    printf("O Bote 2 foi AFUNDADO!\n");
+
     }
     else {
-        printf("\n ERROU! \n");
+        printf("\nERROU!\n");
         tabAtaque[x][y] = 'O';       // marca erro no tabuleiro de ataque
         if (tabDefesa[x][y] == '~')
             tabDefesa[x][y] = 'O';   // marca erro também no tabuleiro de defesa
@@ -251,6 +278,8 @@ int aindaTemNavio(char tab[8][8]) {
     }
     return 0; // nenhum navio vivo
 }
+
+
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
