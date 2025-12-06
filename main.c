@@ -10,6 +10,7 @@ void instrucoes() { // exibe explicação das regras
     printf("3. Os jogadores alternam turnos tentando acertar os navios adversários.\n");
     printf("4. Vence quem destruir todos os navios inimigos.\n\n");
 }
+
 typedef struct{
     int x;
     int y;
@@ -31,12 +32,8 @@ typedef struct{
     ponto posicao[2];
 }bote;
 
-int contador_rodadas = 0;
 
-
-
-
-void mostrartabuleiro(char tab1[8][8]){ // funçao para mostrar tabuleiro de posiçao dos navios do jogador 1
+void mostrartabuleiro(char tab1[8][8]){ // funçao para a posiçao dos navios do jogador
     printf("  "); // recurso estético
     for(int p=1;p<9;p++)//numeração das colunas
         printf("%d ",p);
@@ -142,10 +139,10 @@ void posicaonavio (char tab[8][8], ponto posicoes[], int tamanho) {
 void posicionarNavio(char tab1[8][8]){
 
     // cria as estruturas
+    bote bote1, bote2;
     portaAvioes pA1;
     navioTanque nT1;
     submarino sub1;
-    bote bote1, bote2;
 
     printf("\n");
     printf("Vamos posicionar os navios! \n");
@@ -167,14 +164,22 @@ void posicionarNavio(char tab1[8][8]){
     posicaonavio(tab1, bote2.posicao, 2);
 }
 
-void rodadas(char tabDefesa[8][8], char tabAtaque[8][8]) {
+
+int acertosJog1 = 0;
+int errosJog1 = 0;
+int acertosJog2 = 0;
+int errosJog2 = 0;
+int contador_rodadas = 0;
+
+
+void rodadas(char tabDefesa[8][8], char tabAtaque[8][8], int jogador) {
 
     int linha, coluna;
     int x, y;
 
 
     printf("\nPosiscione seu ataque: \n");
-    printf("Escolha a linha (1-8): "); // receber as coordenadas
+    printf("Escolha a linha (1-8): ");
     scanf("%d", &linha);
     printf("Escolha a coluna (1-8): ");
     scanf("%d", &coluna);
@@ -188,25 +193,32 @@ void rodadas(char tabDefesa[8][8], char tabAtaque[8][8]) {
         return;
     }
 
-    //posição repetida
+
     if (tabAtaque[x][y] == 'X' || tabAtaque[x][y] == 'O') {
     printf("\nVocê já jogou nessa posição! Rodada perdida.\n");
-    contador_rodadas++;
     return;
 }
 
     // verificar se acertou FEITO
     if (tabDefesa[x][y] == 'N') {
-        printf("\n Acertou o navio inimigo! \n");
+        printf("\nAcertou o navio inimigo! \n");
         tabDefesa[x][y] = 'X';       // acerto
-        tabAtaque[x][y] = 'X';       // marca acerto no tabuleiro de ataque
+        tabAtaque[x][y] = 'X';   // marca acerto no tabuleiro de ataque
+
+         if (jogador == 1) acertosJog1++;
+         else acertosJog2++;
     }
     else {
         printf("\n ERROU! \n");
         tabAtaque[x][y] = 'O';       // marca erro no tabuleiro de ataque
         if (tabDefesa[x][y] == '~')
             tabDefesa[x][y] = 'O';   // marca erro também no tabuleiro de defesa
+
+            if (jogador == 1) errosJog1++;
+        else errosJog2++;
     }
+
+    contador_rodadas++;
 
     // imprimir tabuleiro ataque FEITO
     printf("\nTabuleiro de ataques:\n");
@@ -223,11 +235,9 @@ void rodadas(char tabDefesa[8][8], char tabAtaque[8][8]) {
     }
 
     if (acabou) {
-        printf("\n TODOS OS NAVIOS DO INIMIGO FORAM DESTRUÍDOS! \n");
-        printf("\n FIM DE JOGO! \n");
+        printf("\nTODOS OS NAVIOS DO INIMIGO FORAM DESTRUÍDOS! \n");
+        printf("\nFIM DE JOGO! \n");
     }
-
-    contador_rodadas++;
 
      // todo fim de rodada: guardar informações no arquivo FAZER
 }
@@ -241,8 +251,6 @@ int aindaTemNavio(char tab[8][8]) {
     }
     return 0; // nenhum navio vivo
 }
-
-
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
@@ -279,38 +287,48 @@ int main() {
             posicionarNavio(tab1); // começa o posicionamento dos navios do jogador 1
 
 
-            system("cls"); // limpa a tela
+            system("cls"); // limpa a tela - se for abrir no linux tem que colocar system("clear")
             printf("\nTabuleiro do Jogador 1 salvo!\nAgora o Jogador 2 irá posicionar os navios.\n");
 
             // Jogador 2
             mostrartabuleiro(tab2); // exibe o tabuleiro do jogador 2
             posicionarNavio(tab2); // começa o posicionamento dos navios do jogador 2
 
-            system("cls"); // limpa novamente
+            system("cls"); // limpa a tela - se for abrir no linux tem que colocar system("clear")
 
                  printf("\n===== INICIANDO AS RODADAS =====\n");
 
                 // loop até alguém vencer
-                while (1) {
+               while (1) {
 
-                printf("\n VEZ DO JOGADOR 1 \n");
-                rodadas(tab2, ataque1);   // jogador 1 ataca jogador 2
+            printf("\nVEZ DO JOGADOR 1 \n");
+            rodadas(tab2, ataque1, 1);
 
-                if (!aindaTemNavio(tab2)) {  // jogador 2 perdeu
-                printf("\n JOGADOR 1 VENCEU O JOGO! \n");
-                break;
-            }
+            if (!aindaTemNavio(tab2)) {
+            printf("\nJOGADOR 1 VENCEU O JOGO! \n");
 
-                printf("\n VEZ DO JOGADOR 2 \n");
-                rodadas(tab1, ataque2);   // jogador 2 ataca jogador 1
+            printf("\n===== PLACAR FINAL =====\n");
+            printf("Rodadas jogadas: %d\n\n", contador_rodadas);
 
-                if (!aindaTemNavio(tab1)) { // jogador 1 perdeu
-                printf("\n JOGADOR 2 VENCEU O JOGO! \n");
-            break;
-        }
+            printf("Jogador 1:\nAcertos: %d\nErros: %d\n\n", acertosJog1, errosJog1);
+            printf("Jogador 2:\nAcertos: %d\nErros: %d\n\n", acertosJog2, errosJog2);
+        break;
     }
 
+            printf("\nVEZ DO JOGADOR 2 \n");
+            rodadas(tab1, ataque2, 2);
 
+            if (!aindaTemNavio(tab1)) {
+            printf("\nJOGADOR 2 VENCEU O JOGO! \n");
+
+            printf("\n===== PLACAR FINAL =====\n");
+            printf("Rodadas jogadas: %d\n\n", contador_rodadas);
+
+            printf("Jogador 1:\nAcertos: %d\nErros: %d\n\n", acertosJog1, errosJog1);
+            printf("Jogador 2:\nAcertos: %d\nErros: %d\n\n", acertosJog2, errosJog2);
+        break;
+    }
+}
 
                 break;
 
