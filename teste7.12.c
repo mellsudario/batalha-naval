@@ -81,7 +81,7 @@ void inicializartabuleiro(char tab1[8][8]){  // funçao para inicializar o tabul
     }
 }
 
-void gravarTabuleiro(char tab1[8][8],FILE*arq){
+void gravarTabuleiro(char tab1[8][8],FILE *arq){
     char c;
     for(int i = 0 ; i< 8 ; i++){
         for(int p = 0 ; p < 8; p++){
@@ -183,7 +183,7 @@ void posicaonavio (char tab[8][8], ponto posicoes[], int tamanho) {
 
 void posicionarNavio(char tab1[8][8],int jogador,FILE*arq){
 
-    fprintf("Tabuleiro Defesa Jogador %d",jogador);
+    fprintf(arq, "Tabuleiro Defesa Jogador %d\n ",jogador);
 
     printf("\n");
     printf("Vamos posicionar os navios! \n");
