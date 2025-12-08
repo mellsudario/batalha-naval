@@ -14,11 +14,11 @@ void instrucoes() { // exibe explicação das regras
     printf("4. Vence quem destruir todos os navios inimigos.\n\n");
 }
 
-int menu(void){
+int menuSECUNDARIO(void){
     int m;
     do{
         printf("\n======== MENU =========\n");
-        printf(" 1 - CONTINUAR JOGO\n");
+        printf(" 1 - CONTINUAR JOGANDO\n");
         printf(" 2 - SALVAR E SAIR DO JOGO\n");
         scanf("%d",&m);
         if(m != 1 && m != 2){
@@ -224,6 +224,32 @@ int acertosJog2 = 0;
 int errosJog2 = 0;
 int contador_rodadas = 0;
 
+void sair_salvar(){
+
+}
+
+void fim_de_jogo(){
+    // fechando arquivos
+    fclose(jogadas);
+    fclose(tabjog1);
+    fclose(tabjog2);
+
+    // removendo arquivos
+    remove("rodadas.txt");
+    remove("tabuleiros_jogador1.txt");
+    remove("tabuleiros_jogador2.txt");
+
+}
+
+int aindaTemNavio(char tab[8][8]) {
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            if (tab[i][j] == 'N')
+                return 0; // ainda tem navio
+        }
+    }
+    return 1; // nenhum navio vivo
+}
 
 void rodadas(char tabDefesa[8][8], char tabAtaque[8][8], int jogador) {
 
@@ -299,42 +325,46 @@ if (jogador == 2){
 
     printf("Jogador 1:\nAcertos: %d\nErros: %d\n\n", acertosJog1, errosJog1);
     printf("Jogador 2:\nAcertos: %d\nErros: %d\n\n", acertosJog2, errosJog2);
+    // todo fim de rodada: guardar informações no arquivo
+    // Obs: rodada termina depois que o jogador 2 jogar
+    fprintf(jogadas,"Rodadas jogadas: %d\n\n", contador_rodadas);
+
+    fprintf(jogadas,"Jogador 1:\nAcertos: %d\nErros: %d\n\n", acertosJog1, errosJog1);
+    fprintf(jogadas,"Jogador 2:\nAcertos: %d\nErros: %d\n\n", acertosJog2, errosJog2);
+    
+    // para saber se continua o jogo ou salva para continuar depois
     continua = menu();
     if(continua == 2){
-        sair();// dar um jeito de ser do jogo como na opção 4 e ajeitar esse loop de lá
+        salvar_sair();// dar um jeito de sair do jogo como na opção 4 e ajeitar esse loop de lá
     }
 }
     
-    // tem duas verificações de fim de jogo, isso é realmente necessário?
     // fim : indentificar quando todos os navios de um jogador foram derrubados FEITO
-    int acabou = 1;
-    for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 8; j++) {
-            if (tabDefesa[i][j] == 'N') {
-                acabou = 0; // ainda há navio vivo
-            }
-        }
-    }
+    int acabou = aindaTemNavio(tabDefesa);
 
     if (acabou) {
         printf("\nTODOS OS NAVIOS DO INIMIGO FORAM DESTRUÍDOS! \n");
         printf("\nFIM DE JOGO! \n");
-    }
-     // todo fim de rodada: guardar informações no arquivo FAZER
-}
-
-int aindaTemNavio(char tab[8][8]) {
-    for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 8; j++) {
-            if (tab[i][j] == 'N')
-                return 1; // ainda tem navio
-        }
-    }
-    return 0; // nenhum navio vivo
+        fim_de_jogo();
+    } 
 }
 
 
-void novoJogo(char tab1[][], char tab2[][], char ataque1[][],char ataque2[][]){
+void continuarJogo(char tab1[8][8], char tab2[8][8], char ataque1[8][8],char ataque2[8][8]){
+    jogadas = fopen("rodadas.txt","r+"); // guarda erros,acertos e número de rodadas
+    tabjog1 = fopen("tabuleiros_jogador1.txt","r+"); // guarda situaçao dos tabuleiros de ataque e defesa do jog 1
+    tabjog2 = fopen("tabuleiros_jogador2.txt","r+"); // guarda situação dos tabuleiros de ataque e defesa do jog 2
+    // mostrar erro se tentar continuar jogando sem haver um jogo anterior
+    //nesse caso, não permitir e talvez levar ao menu novamente
+    //pegar tabuleiro do arquivo 
+
+     // Jogador 1
+    mostrartabuleiro(tab1); // exibe o tabuleiro do jogador 1
+    system("clear"); // limpa a tela - se for abrir no linux tem que colocar system("clear")
+
+}
+
+void novoJogo(char tab1[8][8], char tab2[8][8], char ataque1[8][8],char ataque2[8][8]){
     // abrindo arquivos para nova partida
     jogadas = fopen("rodadas.txt","w+"); // guarda erros,acertos e número de rodadas
     tabjog1 = fopen("tabuleiros_jogador1.txt","w+"); // guarda situaçao dos tabuleiros de ataque e defesa do jog 1
@@ -345,14 +375,14 @@ void novoJogo(char tab1[][], char tab2[][], char ataque1[][],char ataque2[][]){
     posicionarNavio(tab1,1,tabjog1); // começa o posicionamento dos navios do jogador 1
 
 
-    system("cls"); // limpa a tela - se for abrir no linux tem que colocar system("clear")
+    system("clear"); // limpa a tela - se for abrir no linux tem que colocar system("clear")
     printf("\nTabuleiro do Jogador 1 salvo!\nAgora o Jogador 2 irá posicionar os navios.\n");
 
     // Jogador 2
     mostrartabuleiro(tab2); // exibe o tabuleiro do jogador 2
     posicionarNavio(tab2,2,tabjog2); // começa o posicionamento dos navios do jogador 2
 
-    system("cls"); // limpa a tela - se for abrir no linux tem que colocar system("clear")
+    system("clear"); // limpa a tela - se for abrir no linux tem que colocar system("clear")
 
         printf("\n===== INICIANDO AS RODADAS =====\n");
 
@@ -370,8 +400,8 @@ void novoJogo(char tab1[][], char tab2[][], char ataque1[][],char ataque2[][]){
 
             printf("Jogador 1:\nAcertos: %d\nErros: %d\n\n", acertosJog1, errosJog1);
             printf("Jogador 2:\nAcertos: %d\nErros: %d\n\n", acertosJog2, errosJog2);
-        break;
-    }
+            break;
+            }
 
         printf("\nVEZ DO JOGADOR 2 \n");
         rodadas(tab1, ataque2, 2);
@@ -384,8 +414,8 @@ void novoJogo(char tab1[][], char tab2[][], char ataque1[][],char ataque2[][]){
 
             printf("Jogador 1:\nAcertos: %d\nErros: %d\n\n", acertosJog1, errosJog1);
             printf("Jogador 2:\nAcertos: %d\nErros: %d\n\n", acertosJog2, errosJog2);
-        break;
-    }
+            break;
+            }
 }
 }
 
@@ -412,19 +442,21 @@ int main() {
         printf("2 - Continuar Jogo\n");
         printf("3 - Instruções\n");
         printf("4 - Sair do Jogo\n");
-        printf("Escolha uma opção (1–4): ");
+        printf("Escolha uma opção (1-4): ");
 
         scanf("%d", &opcao); // lê opção do jogador
 
         switch(opcao) { // estrutura switch para tratar cada opção do menu
             case 1:
+                //grava por cima do jogo anterior, se houver
                 printf("\n Novo jogo \n\n");
                 novoJogo(tab1,tab2,ataque1,ataque2);
                 break;
 
             case 2:
-                  printf("\n Continuar jogo :( \n");
-                // ainda tem que fazer aq tb kkkkkkkk
+                // Obs: só é possível resgatar o jogo imediatamente anterior  
+                printf("\n Continuar jogo :( \n");
+                continuarJogo(tab1,tab2,ataque1,ataque2);
                 break;
 
             case 3:
@@ -440,7 +472,7 @@ int main() {
                 printf("\nOpção inválida! Tente novamente.\n");
         }
 
-    } while (opcao != 4); // o menu continua repetindo até que a opção 4 seja escolhida
+    } while (opcao < 1|| opcao > 4 || opcao == 3); // o menu repete para opção inválida e para instruções
 
     return 0;
 }
