@@ -415,7 +415,7 @@ void continuarJogo(char tab1[8][8], char tab2[8][8], char ataque1[8][8],char ata
     /* vê se os arquivos existe*/
 if ( jogadas ==  NULL || tabjog1 == NULL ||tabjog2 == NULL){
     printf("Nenhum jogo encontrado.\n");
-    return;
+    exit(1); /* sai do loop*/
 }
 /*le os tabuleiros dos arquivos*/
 lerTabuleiro(tabjog1, tab1); /* carrega o tabuleiro do jogador 1.*/
