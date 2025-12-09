@@ -195,7 +195,7 @@ void posicaonavio (char tab[8][8], ponto posicoes[], int tamanho) {
 
 void posicionarNavio(char tab1[8][8],int jogador,FILE*arq){
 
-    fprintf("Tabuleiro Defesa Jogador %d",jogador);
+    printf("Tabuleiro Defesa Jogador %d",jogador);
 
     printf("\n");
     printf("Vamos posicionar os navios! \n");
@@ -280,13 +280,13 @@ int rodadas(char tabDefesa[8][8], char tabAtaque[8][8], int jogador) {
 
     if (x < 0 || x > 7 || y < 0 || y > 7) {
         printf("\nCoordenada fora do tabuleiro! Rodada perdida.\n");
-        return;
+        exit(1);
     }
 
     //posição repetida
     if (tabAtaque[x][y] == 'X' || tabAtaque[x][y] == 'O') {
     printf("\nVocê já jogou nessa posição! Rodada perdida.\n");
-    return;
+     exit(1);
 }
 
     // verificar se acertou FEITO
