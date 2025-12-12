@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
+#include <unistd> // serve para que o sistema operacional modifique algo (como mudar o tamanho de um arquivo, criar um novo processo, ou ler dados de baixo nível)
 
 FILE*jogadas,*tabjog1,*tabjog2;
 
