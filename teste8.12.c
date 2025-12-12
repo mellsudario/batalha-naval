@@ -81,7 +81,7 @@ void ler_placar_salvo() {
 		// Tenta ler o contador de rodadas
 		sscanf(linha, "Rodadas jogadas: %d", &contador_rodadas); // sscanf = scanf de string
 
-		if (strstr(linha, "Jogador 1:")) { // strstr C) uma funC'C#o da biblioteca string.h que procura/ verifica palavras especC-ficas em uma frase.
+		if (strstr(linha, "Jogador 1:")) { // strstr é uma função da biblioteca string.h que procura/ verifica palavras específicas em uma frase.
 			lendoJog1 = 1;
 			lendoJog2 = 0;
 		} else if (strstr(linha, "Jogador 2:")) {
