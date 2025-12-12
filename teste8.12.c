@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-#include <unistd> // serve para que o sistema operacional modifique algo (como mudar o tamanho de um arquivo, criar um novo processo, ou ler dados de baixo nível)
+#include <unistd.h> // serve para que o sistema operacional modifique algo (como mudar o tamanho de um arquivo, criar um novo processo, ou ler dados de baixo nível)
 
 FILE*jogadas,*tabjog1,*tabjog2;
 
@@ -152,7 +152,7 @@ void lerTabuleiro(FILE *arq, char tab[8][8]) {
 void posicaonavio (char tab[8][8], ponto posicoes[], int tamanho) {
 	int linha, coluna, direcao;
 
-	while (1) { // repete atC) colocar o navio corretamente
+	while (1) { // repete até colocar o navio corretamente
 
 		do {
 			printf("Escolha a linha (1-8): ");
@@ -167,23 +167,23 @@ void posicaonavio (char tab[8][8], ponto posicoes[], int tamanho) {
 			if(coluna < 1|| coluna > 8) {
 				printf("Posicao invalida! Fora do tabuleiro!"); // Um navio nao pode ser posicionado fora do tabuleiro.
 			}
-			while(coluna < 1 || coluna > 8);
+			} while(coluna < 1 || coluna > 8);
 
-			// converte para C-ndice comeC'ando em 0
+			// converte para o índice começando em 0
 			linha--;
 			coluna--;
 
-			// escolhe direC'C#o
-			printf("Escolha a direC'C#o:\n");
+			// escolhe direção
+			printf("Escolha a direção:\n");
 			do {
 				printf("1 - Norte\n");
 				printf("2 - Sul\n");
 				printf("3 - Leste\n");
 				printf("4 - Oeste\n");
-				printf("Digite a direC'C#o (1-4): ");
+				printf("Digite a direção (1-4): ");
 				scanf("%d", &direcao);
 				if (direcao < 1 || direcao > 4) {
-					printf("\nDireC'C#o invC!lida! Escolha um valor entre 1 e 4.\n\n");
+					printf("\nDireção inválida! Escolha um valor entre 1 e 4.\n\n");
 				}
 			} while (direcao < 1 || direcao > 4);
 
@@ -205,15 +205,15 @@ void posicaonavio (char tab[8][8], ponto posicoes[], int tamanho) {
 					break;
 				}
 
-				// verifica colisC#o com outro navio
-				if (tab[x][y] != '~') { // Dois navios nC#o podem ocupar a mesma posiC'C#o
+				// verifica colisão com outro navio
+				if (tab[x][y] != '~') { // Dois navios nC#o podem ocupar a mesma posição
 					pode = 0;
 					break;
 				}
 			}
 
-			if (pode == 0) {
-				printf("\n PosiC'C#o invC!lida! O navio nC#o cabe ou colide com outro.\n\n");
+		if (pode == 0) {
+				printf("\n Posição inválida! O navio não cabe ou colide com outro.\n\n");
 				continue; // repete desde o inC-cio
 			}
 
@@ -237,32 +237,33 @@ void posicaonavio (char tab[8][8], ponto posicoes[], int tamanho) {
 			printf("\nNavio colocado com sucesso!\n\n");
 			break; // sai do while, navio posicionado
 		}
-		void posicionarNavio(char tab1[8][8],int jogador,FILE*arq) {
+	}
+	void posicionarNavio(char tab1[8][8],int jogador,FILE*arq) {
 
 			printf("Tabuleiro Defesa Jogador %d",jogador);
 
 			printf("\n");
 			printf("Vamos posicionar os navios! \n");
-			printf("Vamos comeC'ar pelo Porta-AviC#o.\n");
+			printf("Vamos começar pelo Porta-Avião.\n");
 
-			printf("\n=== Porta-AviC5es (5 espaC'os) ===\n");
+			printf("\n=== Porta-Aviões (5 espaços) ===\n");
 			posicaonavio(tab1, pA1.posicao, 5); // Porta-aviões - 5 células
 
-			printf("\n=== Navio-Tanque (4 espaC'os) ===\n");
+			printf("\n=== Navio-Tanque (4 espaços) ===\n");
 			posicaonavio(tab1, nT1.posicao, 4); // Navio-tanque - 4 células
-			printf("\n=== Submarino (3 espaC'os) ===\n");
+			printf("\n=== Submarino (3 espaços) ===\n");
 			posicaonavio(tab1, sub1.posicao, 3); //Submarino - 3 células
 
-			printf("\n=== Bote 1 (2 espaC'os) ===\n");
+			printf("\n=== Bote 1 (2 espaços) ===\n");
 			posicaonavio(tab1, bote1.posicao, 2); // Bote 2 células
 
-			printf("\n=== Bote 2 (2 espaC'os) ===\n");
+			printf("\n=== Bote 2 (2 espaços) ===\n");
 			posicaonavio(tab1, bote2.posicao, 2); // Bote 2 células
 
 			gravarTabuleiro(tab1,arq);// grava o tabuleiro de posicoes inicial do tabuleiro de defesa
 		}
 
-// funC'C#o para checar se um navio foi afundado
+// função para checar se um navio foi afundado
 		int navioAfundado(ponto posicoes[], int tamanho, char tab[8][8]) {
 			for (int i = 0; i < tamanho; i++) {
 				if (tab[posicoes[i].x][posicoes[i].y] != 'X') {
@@ -519,18 +520,20 @@ void posicaonavio (char tab[8][8], ponto posicoes[], int tamanho) {
 
 			// Jogador 1
 			mostrartabuleiro(tab1); // exibe o tabuleiro do jogador 1
-			posicionarNavio(tab1,1,tabjog1); // comeC'a o posicionamento dos navios do jogador 1
+			posicionarNavio(tab1,1,tabjog1); // começa o posicionamento dos navios do jogador 1
 
-
-			system("clear"); // limpa a tela - se for abrir no linux tem que colocar system("clear")
-			printf("\nTabuleiro do Jogador 1 salvo!\nAgora o Jogador 2 irC! posicionar os navios.\n");
+        if (system("cls") != 0){
+            system("clear");
+        }
+			printf("\nTabuleiro do Jogador 1 salvo!\nAgora o Jogador 2 irá posicionar os navios.\n");
 
 			// Jogador 2
 			mostrartabuleiro(tab2); // exibe o tabuleiro do jogador 2
 			posicionarNavio(tab2,2,tabjog2); // comeC'a o posicionamento dos navios do jogador 2
 
-			system("clear"); // limpa a tela - se for abrir no linux tem que colocar system("clear")
-
+			  if (system("cls") != 0){
+            system("clear");
+        }
 			printf("\n===== INICIANDO AS RODADAS =====\n");
 
 			loop_jogo(tab1,tab2,ataque1,ataque2);
