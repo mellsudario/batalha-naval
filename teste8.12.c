@@ -318,7 +318,7 @@ void posicaonavio (char tab[8][8], ponto posicoes[], int tamanho) {
 			int x, y;
 
 
-			printf("\nPosiscione seu ataque: \n");// Cada jogada consiste em informar coordenadas (linha e coluna) para atacar o tabuleiro inimigo
+			printf("\nPosicione seu ataque: \n");// Cada jogada consiste em informar coordenadas (linha e coluna) para atacar o tabuleiro inimigo
 			printf("Escolha a linha (1-8): "); // receber as coordenadas
 			scanf("%d", &linha);
 			printf("Escolha a coluna (1-8): ");
@@ -489,16 +489,26 @@ void posicaonavio (char tab[8][8], ponto posicoes[], int tamanho) {
 
 			// 2. Carrega o Placar para ver as rodadas,  os acertos e os erros
 			ler_placar_salvo(); // FunC'C#o  para restaurar o placar global
+			
+			//RECONSTRUIR TABULEIROS DE ATAQUE
+			for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; j++) {
+        if (tab2[i][j] == 'X')
+            ataque1[i][j] = 'X';
+        else if (tab2[i][j] == 'O')
+            ataque1[i][j] = 'O';
+        else
+            ataque1[i][j] = '~';
 
+        if (tab1[i][j] == 'X')
+            ataque2[i][j] = 'X';
+        else if (tab1[i][j] == 'O')
+            ataque2[i][j] = 'O';
+        else
+            ataque2[i][j] = '~';
+    }
+}
 
-
-
-			// Exibe os tabuleiros carregados
-			printf("\nTabuleiro Defesa Jogador 1 (Carregado):\n");
-			mostrartabuleiro(tab1);
-
-			printf("\nTabuleiro Defesa Jogador 2 (Carregado):\n");
-			mostrartabuleiro(tab2);
 
 			printf("\n===== CONTINUANDO AS RODADAS =====\n");
 
@@ -596,3 +606,4 @@ void posicaonavio (char tab[8][8], ponto posicoes[], int tamanho) {
 
     return 0;
 }
+
