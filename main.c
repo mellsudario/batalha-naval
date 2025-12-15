@@ -21,7 +21,7 @@ int menuSECUNDARIO(void) {
 		printf("\n======== MENU =========\n");
 		printf(" 1 - CONTINUAR JOGANDO\n");
 		printf(" 2 - SALVAR E SAIR DO JOGO\n");
-		if (scanf("%d", &m) != 1) { // Leitura robusta
+		if (scanf("%d", &m) != 1) { // Leitura
             printf("Entrada inválida! Digite apenas números.\n");
             while (getchar() != '\n'); // Limpa buffer
             m = 0; // Força repetição
@@ -92,14 +92,35 @@ void ler_placar_e_navios() {
 	contador_rodadas = 0;
 	acertosJog1 = 0; errosJog1 = 0;
 	acertosJog2 = 0; errosJog2 = 0;
+	int jogadorAtual = 0;
 
 	// as variáveis globais serão atualizadas com o último valor lido
-	while (fgets(linha, sizeof(linha), arq)) {
+	  while (fgets(linha, sizeof(linha), arq)) {
 
-		// 1. Tenta ler o Placar e Rodadas
-		sscanf(linha, "Rodadas jogadas: %d", &contador_rodadas);
-		sscanf(linha, "Jogador 1:\nAcertos: %d\nErros: %d", &acertosJog1, &errosJog1);
-		sscanf(linha, "Jogador 2:\nAcertos: %d\nErros: %d", &acertosJog2, &errosJog2);
+        // Rodadas
+        if (sscanf(linha, "Rodadas jogadas: %d", &contador_rodadas) == 1)
+            continue;
+
+        // Identifica jogador
+        if (strncmp(linha, "Jogador 1:", 10) == 0) {
+            jogadorAtual = 1;
+            continue;
+        }
+
+        if (strncmp(linha, "Jogador 2:", 10) == 0) {
+            jogadorAtual = 2;
+            continue;
+        }
+
+        // Acertos
+        if (sscanf(linha, "Acertos: %d",
+            (jogadorAtual == 1 ? &acertosJog1 : &acertosJog2)) == 1)
+            continue;
+
+        // Erros
+        if (sscanf(linha, "Erros: %d",
+            (jogadorAtual == 1 ? &errosJog1 : &errosJog2)) == 1)
+            continue;
 
 
 		// tenta ler a etiqueta do navio, ou seja, como ele eh identificado, e todas as coordenadas (Geral)
@@ -548,9 +569,15 @@ void posicaonavio (char tab[8][8], ponto posicoes[], int tamanho) {
 				if (jogadas == NULL) { /* Trata o erro */ return -1; }
 
 				// 1. Imprime o novo placar
-				fprintf(jogadas,"Rodadas jogadas: %d\n\n", contador_rodadas);
-				fprintf(jogadas,"Jogador 1:\nAcertos: %d\nErros: %d\n\n", acertosJog1, errosJog1);
-				fprintf(jogadas,"Jogador 2:\nAcertos: %d\nErros: %d\n\n", acertosJog2, errosJog2);
+				fprintf(jogadas, "Rodadas jogadas: %d\n\n", contador_rodadas);
+
+fprintf(jogadas, "Jogador 1:\n");
+fprintf(jogadas, "Acertos: %d\n", acertosJog1);
+fprintf(jogadas, "Erros: %d\n\n", errosJog1);
+
+fprintf(jogadas, "Jogador 2:\n");
+fprintf(jogadas, "Acertos: %d\n", acertosJog2);
+fprintf(jogadas, "Erros: %d\n\n", errosJog2);
 
 				// 2. vamos salvar as posiçoes dos navios (jogador 1 e 2), crucial para " continuar"
 				fprintf(jogadas, "PA1 %d %d %d %d %d %d %d %d %d %d\n",
