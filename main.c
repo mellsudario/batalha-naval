@@ -75,7 +75,7 @@ int acertosJog2 = 0;
 int errosJog2 = 0;
 int contador_rodadas = 0;
 
-// Essa função vai ler o placar reesceito e a posição dos navios
+// Essa função vai ler o placar reescrito e a posição dos navios
 
 void ler_placar_e_navios() {
 	FILE *arq = fopen("rodadas.txt", "r");
@@ -114,7 +114,7 @@ void ler_placar_e_navios() {
 
         // Acertos
         if (sscanf(linha, "Acertos: %d",
-            (jogadorAtual == 1 ? &acertosJog1 : &acertosJog2)) == 1)
+            (jogadorAtual == 1 ? &acertosJog1 : &acertosJog2)) == 1) // aqui ele vai armazenar esse número em OU acertosJog1 (Se o jogadorAtual for 1) OU em acertosJog2 (Se o jogadorAtual for 2), essa eh a função do "?", eh como um se, somente se.
             continue;
 
         // Erros
@@ -124,7 +124,7 @@ void ler_placar_e_navios() {
 
 
 		// tenta ler a etiqueta do navio, ou seja, como ele eh identificado, e todas as coordenadas (Geral)
-		int coords[10];
+		int coords[10]; // 10 porque o maior navio tem 5 celulas, e como utilizaremos
 		int num_lidos = sscanf(linha, "%s %d %d %d %d %d %d %d %d %d %d",
 							   tipoNavio, &coords[0], &coords[1], &coords[2], &coords[3],
 							   &coords[4], &coords[5], &coords[6], &coords[7], &coords[8],
@@ -366,6 +366,8 @@ void posicaonavio (char tab[8][8], ponto posicoes[], int tamanho) {
           printf("\n=== Bote 2 (2 espaços) ===\n");
         	posicaonavio(tab1, bote2.posicao, 2);
 
+        	system("cls");
+
             } else { // Jogador 2
         printf("\n=== Porta-Aviões (5 espaços) ===\n");
          posicaonavio(tab1, pA2.posicao, 5);
@@ -380,6 +382,8 @@ void posicaonavio (char tab[8][8], ponto posicoes[], int tamanho) {
 
       	 printf("\n=== Bote 2 (2 espaços) ===\n");
        	 posicaonavio(tab1, bote4.posicao, 2);
+
+       	 system("cls");
             }
 			gravarTabuleiro(tab1,arq);// grava o tabuleiro de posicoes inicial no tabuleiro de defesa
 		}
