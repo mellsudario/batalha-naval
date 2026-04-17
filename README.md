@@ -26,8 +26,11 @@ Jogo de Batalha Naval em C executado no terminal, para dois jogadores, com siste
 ## Menu
 
 1 - Novo Jogo
+
 2 - Continuar Jogo
+
 3 - Instruções
+
 4 - Sair
 
 
