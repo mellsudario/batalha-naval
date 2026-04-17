@@ -2,7 +2,6 @@
 
 Jogo de Batalha Naval em C executado no terminal, para dois jogadores, com sistema de turnos, placar e salvamento de partida.
 
----
 
 ## Funcionalidades
 
