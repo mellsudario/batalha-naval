@@ -3,6 +3,7 @@
 Jogo de Batalha Naval em C executado no terminal, para dois jogadores, com sistema de turnos, placar e salvamento de partida.
 
 
+
 ## Funcionalidades
 
 * 2 jogadores locais
@@ -12,23 +13,15 @@ Jogo de Batalha Naval em C executado no terminal, para dois jogadores, com siste
 * Identificação de navios afundados
 * Salvar e continuar jogo
 
----
+
 
 ## Tabuleiro
 
 * Tamanho: 8x8
 * `~` água | `N` navio | `X` acerto | `O` erro
 
----
 
-## Como executar
 
-```bash
-gcc batalha_naval.c -o batalha_naval
-./batalha_naval
-```
-
----
 
 ## Menu
 
@@ -37,7 +30,7 @@ gcc batalha_naval.c -o batalha_naval
 3 - Instruções
 4 - Sair
 
----
+
 
 ## Salvamento
 
@@ -49,7 +42,7 @@ Arquivos gerados:
 
 Apenas o último jogo pode ser continuado.
 
----
+
 
 ## Fim de jogo
 
