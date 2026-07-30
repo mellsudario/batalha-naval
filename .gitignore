@@ -1,0 +1,9 @@
+# Arquivos gerados pelo Code::Blocks (build/cache)
+bin/
+obj/
+*.depend
+*.layout
+
+# Arquivos objeto e executáveis
+*.o
+*.exe
